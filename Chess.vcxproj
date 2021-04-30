@@ -141,7 +141,6 @@
   <ItemGroup>
     <ClCompile Include="bishop.cpp" />
     <ClCompile Include="board.cpp" />
-    <ClCompile Include="empty.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="horseman.cpp" />
     <ClCompile Include="king.cpp" />
