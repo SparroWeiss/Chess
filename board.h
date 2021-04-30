@@ -5,6 +5,7 @@
 #define COLUMNS 8
 
 class Soldier;
+enum Color;
 
 class Board
 {
@@ -15,7 +16,9 @@ public:
 	std::string board_to_string() const;
 	void string_to_board(const std::string board);
 	void move(const std::string command, const int player);
+	static int string_to_index(const std::string str);
 	Soldier* _board[ROWS * COLUMNS];
+	Color* _curr_player;
 private:
 	int size() const;
 };

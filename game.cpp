@@ -5,6 +5,7 @@ Game::Game()
 	_board = new Board();
 	_board->string_to_board(BOARD);
 	_curr_player = Color::black;
+	_board->_curr_player = &_curr_player;
 }
 
 Game::~Game()

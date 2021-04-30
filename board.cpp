@@ -59,8 +59,8 @@ void Board::string_to_board(const std::string board)
 
 void Board::move(const std::string command, const int player)
 {
-	int src_index = (command[0] - 'a')/* place in row */ + ROWS * (COLUMNS - (command[1] - '0'))/* row */;
-	int dst_index = (command[2] - 'a')/* place in row */ + ROWS * (COLUMNS - (command[3] - '0'))/* row */;
+	int src_index = string_to_index(command.substr(0, 2));
+	int dst_index = string_to_index(command.substr(2, 2));
 	if (_board[src_index]->_player != player || _board[src_index]->to_string() == 'e')
 		// Source piece is not owned by the player.
 		throw std::exception("You can't move this piece.");
@@ -80,6 +80,11 @@ void Board::move(const std::string command, const int player)
 	_board[src_index] = new Empty();
 }
 
+int Board::string_to_index(const std::string str)
+{
+	return (str[0] - 'a')/* place in row */ + ROWS * (COLUMNS - (str[1] - '0'))/* row */;;
+}
+
 int Board::size() const
 {
 	int i = 0;
@@ -95,6 +100,7 @@ int Board::size() const
 Board::Board(Board* other)
 {
 	this->string_to_board(other->board_to_string());
+	_curr_player = other->_curr_player;
 }
 
 Board::~Board()
