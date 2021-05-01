@@ -17,6 +17,7 @@ public:
 	void string_to_board(const std::string board);
 	void move(const std::string command, const int player);
 	static int string_to_index(const std::string str);
+	Soldier* string_to_piece(const std::string str) const;
 	Soldier* _board[ROWS * COLUMNS];
 	Color* _curr_player;
 private:

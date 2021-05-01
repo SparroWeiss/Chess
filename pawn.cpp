@@ -18,8 +18,8 @@ bool Pawn::move(Board* board, std::string src, std::string dst)
 	* |   |src|   |
 	* +---+---+---+
 	*/
-	Soldier* src_piece = board->_board[Board::string_to_index(src)];
-	Soldier* dst_piece = board->_board[Board::string_to_index(dst)];
+	Soldier* src_piece = board->string_to_piece(src);
+	Soldier* dst_piece = board->string_to_piece(dst);
 	if (src[0] == dst[0])
 	{ /* Going in straight line */
 		if (dst_piece->to_string() != 'e')
@@ -29,7 +29,7 @@ bool Pawn::move(Board* board, std::string src, std::string dst)
 			if (!_first_move)
 				return false; // Can move two step only on first move.
 			std::string middle = std::string() + char(src[0]) + char((src[1] + dst[1]) / 2); // The middle piece of the path.
-			Soldier* middle_piece = board->_board[Board::string_to_index(middle)];
+			Soldier* middle_piece = board->string_to_piece(middle);
 			if (middle_piece->to_string() != 'e')
 				return false; // The middle piece must be empty.
 		}

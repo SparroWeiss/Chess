@@ -59,30 +59,35 @@ void Board::string_to_board(const std::string board)
 
 void Board::move(const std::string command, const int player)
 {
-	int src_index = string_to_index(command.substr(0, 2));
-	int dst_index = string_to_index(command.substr(2, 2));
-	if (_board[src_index]->_player != player || _board[src_index]->to_string() == 'e')
+	Soldier* src_piece = string_to_piece(command.substr(0, 2));
+	Soldier* dst_piece = string_to_piece(command.substr(2, 2));
+	if (src_piece->_player != player || src_piece->to_string() == 'e')
 		// Source piece is not owned by the player.
 		throw std::exception("You can't move this piece.");
-	if (src_index == dst_index)
+	if (src_piece == dst_piece)
 		// Same piece.
 		throw std::exception("The source is the same as the destination.");
-	if (_board[dst_index]->_player == player && _board[dst_index]->to_string() != 'e')
+	if (dst_piece->_player == player && dst_piece->to_string() != 'e')
 		// Destination piece is owned by the same player.
 		throw std::exception("You can't move to this destination.");
-	if (!_board[src_index]->move(new Board(this), command.substr(0, 2), command.substr(2, 2)))
+	if (!src_piece->move(new Board(this), command.substr(0, 2), command.substr(2, 2)))
 		// The specific piece can't move in this way.
 		throw std::exception("Invalid move of the chosen piece.");
 
 	// Success. Moving the pieces.
-	delete _board[dst_index];
-	_board[dst_index] = _board[src_index];
-	_board[src_index] = new Empty();
+	delete dst_piece;
+	_board[string_to_index(command.substr(2, 2))] = src_piece;
+	_board[string_to_index(command.substr(0, 2))] = new Empty();
 }
 
 int Board::string_to_index(const std::string str)
 {
-	return (str[0] - 'a')/* place in row */ + ROWS * (COLUMNS - (str[1] - '0'))/* row */;;
+	return (str[0] - 'a')/* place in row */ + ROWS * (COLUMNS - (str[1] - '0'))/* row */;
+}
+
+Soldier* Board::string_to_piece(const std::string str) const
+{
+	return _board[string_to_index(str)];
 }
 
 int Board::size() const
