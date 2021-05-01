@@ -1,5 +1,4 @@
 #include "bishop.h"
-#include <math.h>
 
 /// <summary>
 /// This function checks if the bishop piece can move from a source to a destination.
@@ -52,7 +51,7 @@ bool Bishop::clear_middle(Board* board, std::string src, std::string dst)
 /// <summary>
 /// This function returns the character of the piece by it's color.
 /// </summary>
-/// <returns>Upper letter 'P' for black, Lower letter 'p' for white.</returns>
+/// <returns>Upper letter 'B' for black, Lower letter 'b' for white.</returns>
 char Bishop::to_string() const
 {
 	return this->_player == Color::white ? 'b' : 'B';
