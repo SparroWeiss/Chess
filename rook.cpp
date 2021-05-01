@@ -23,7 +23,7 @@ bool Rook::move(Board* board, std::string src, std::string dst)
 	* +---+---+---+---+---+
 	*/
 	if (abs(src[0] - dst[0]) != 0 && abs(src[1] - dst[1]) != 0)
-		return false;
+		return false; // The piece moves only left, right, up or down.
 	return clear_middle(board, src, dst);
 }
 
