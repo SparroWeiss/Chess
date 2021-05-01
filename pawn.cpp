@@ -9,6 +9,15 @@
 /// <returns>If the move of the piece is valid or not.</returns>
 bool Pawn::move(Board* board, std::string src, std::string dst)
 {
+	/*
+	* +---+---+---+
+	* |   |dst|   |
+	* +---+---+---+
+	* |dst|dst|dst|
+	* +---+---+---+
+	* |   |src|   |
+	* +---+---+---+
+	*/
 	Soldier* src_piece = board->_board[Board::string_to_index(src)];
 	Soldier* dst_piece = board->_board[Board::string_to_index(dst)];
 	if (src[0] == dst[0])
